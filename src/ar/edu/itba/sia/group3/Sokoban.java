@@ -9,16 +9,16 @@ import java.nio.file.Paths;
 
 public class Sokoban {
 
-    public static SearchMethod getSearchMethod(String input) {
+    public static Algorithm getSearchMethod(String input) {
         switch (input) {
-//            case "BFS":
-//                return new BFS();
-//            case "DFS":
-//                return new DFS();
-//            case "IDDFS":
-//                return new IDDFS();
-//            case "GGS":
-//                return new GGS();
+            case "BFS":
+                return Algorithm.BFS;
+            case "DFS":
+                return Algorithm.DFS;
+            case "IDDFS":
+                return Algorithm.IDDFS;
+            case "GGS":
+                return Algorithm.GREEDY;
             default: return null;
         }
     }
@@ -44,7 +44,6 @@ public class Sokoban {
                     case '.': board[i][j] = new Cell(CellType.GOAL); break;
                     default: board[i][j] = new Cell(CellType.FREE); break;
                 }
-
             }
         }
         return board;
@@ -78,7 +77,7 @@ public class Sokoban {
             return;
         }
 
-        SearchMethod algorithm = getSearchMethod(args[1]);
+        Algorithm algorithm = getSearchMethod(args[1]);
         if(algorithm==null){
             System.err.println("Error reading search method");
             return;
@@ -89,6 +88,9 @@ public class Sokoban {
             System.err.println("Error reading heuristic method");
             return;
         }
+
+        SokobanState state = new SokobanState(board);
+        Node root = new Node(state);
 
         // -----
         Searcher searcher = new Searcher(algorithm, heuristic, root);
@@ -103,9 +105,9 @@ public class Sokoban {
     }
 
     public static void printNodePath(NodeInterface node) {
-        if(node == null) return;
-        node.getBoard().print();
-        return printNodePath(node.getParent());
+//        if(node == null) return;
+//        node.getBoard().print();
+//        return printNodePath(node.getParent());
     }
 
 }
