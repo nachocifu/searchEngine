@@ -1,7 +1,7 @@
 package ar.edu.itba.sia.group3;
 
 public enum CellType {
-    FREE(" "), WALL("W"), GOAL("G");
+    FREE(" "), WALL("#"), GOAL(".");
 
     String name;
 

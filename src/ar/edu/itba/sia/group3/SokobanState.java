@@ -49,7 +49,18 @@ public class SokobanState implements State, Cloneable {
     }
 
     public SokobanState clone() throws CloneNotSupportedException {
-        return (SokobanState) super.clone();
+        SokobanState sokobanState = (SokobanState) super.clone();
+        Cell[][] newBoard = new Cell[board.length][board[0].length];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                newBoard[i][j] = board[i][j].clone();
+            }
+        }
+        sokobanState.board = newBoard;
+        sokobanState.boxes = new HashSet<>(boxes);
+        sokobanState.targets = new HashSet<>(targets);
+        return sokobanState;
     }
 
 
@@ -72,7 +83,7 @@ public class SokobanState implements State, Cloneable {
             performableActions.add(aux);
         }
         //movement down to cell with box
-        if (board[playerPosition.row + 1][playerPosition.column].hasBox() && !board[playerPosition.row + 2][playerPosition.column].hasBox()
+        if (board[playerPosition.row + 1][playerPosition.column].hasBox() && playerPosition.row+2 < board.length && !board[playerPosition.row + 2][playerPosition.column].hasBox()
                 && !board[playerPosition.row + 2][playerPosition.column].isWall()) {
             aux = this.clone();
             //move player
@@ -95,7 +106,7 @@ public class SokobanState implements State, Cloneable {
             performableActions.add(aux);
         }
         //movement up to cell with box
-        if (board[playerPosition.row - 1][playerPosition.column].hasBox() && !board[playerPosition.row - 2][playerPosition.column].hasBox()
+        if (board[playerPosition.row - 1][playerPosition.column].hasBox() && playerPosition.row-2 >= 0 && !board[playerPosition.row - 2][playerPosition.column].hasBox()
                 && !board[playerPosition.row - 2][playerPosition.column].isWall()) {
             aux = this.clone();
             //move player
@@ -118,7 +129,7 @@ public class SokobanState implements State, Cloneable {
             performableActions.add(aux);
         }
         //movement left to cell with box
-        if (board[playerPosition.row][playerPosition.column - 1].hasBox() && !board[playerPosition.row][playerPosition.column - 2].hasBox()
+        if (board[playerPosition.row][playerPosition.column - 1].hasBox() && playerPosition.column-2 >= 0 && !board[playerPosition.row][playerPosition.column - 2].hasBox()
                 && !board[playerPosition.row][playerPosition.column - 2].isWall()) {
             aux = this.clone();
             //move player
@@ -142,7 +153,7 @@ public class SokobanState implements State, Cloneable {
             performableActions.add(aux);
         }
         //movement right to cell with box
-        if (board[playerPosition.row][playerPosition.column + 1].hasBox() && !board[playerPosition.row][playerPosition.column + 2].hasBox()
+        if (board[playerPosition.row][playerPosition.column + 1].hasBox() && playerPosition.column+2 < board[0].length && !board[playerPosition.row][playerPosition.column + 2].hasBox()
                 && !board[playerPosition.row][playerPosition.column + 2].isWall()) {
             aux = this.clone();
             //move player

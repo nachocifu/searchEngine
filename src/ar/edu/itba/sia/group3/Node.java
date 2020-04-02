@@ -40,8 +40,8 @@ public class Node{
         return state.isDone();
     }
 
-    public void print(){
-        state.getRepresentation();
+    public String print(){
+        return state.getRepresentation();
     }
 }
 

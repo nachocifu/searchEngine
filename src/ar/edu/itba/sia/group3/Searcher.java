@@ -37,6 +37,7 @@ public class Searcher {
         // TODO un while que
         while (!frontier.isEmpty()) {
             current = frontier.poll();
+            System.out.println(current.print());
             if(current.isDone()){
                 return current;
             }

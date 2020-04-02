@@ -66,7 +66,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        if(type == CellType.WALL) return  "#";
         if(hasBox && type ==CellType.GOAL) return "*";
         if(hasPlayer && type ==CellType.GOAL) return "+";
         if(type==CellType.FREE) {
