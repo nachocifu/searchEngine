@@ -1,5 +1,6 @@
 .idea
 out
+searchEngine.iml
 
 # Compiled class file
 *.class
