@@ -36,7 +36,12 @@ public class Searcher {
 
         // TODO un while que
         while (!border.isEmpty()) {
-            //popear,,,revisar si es solucion,,,,revisar si es un passState....y sino explotar,,,meter hijos en queue
+            //popear,,,revisar si es solucion
+            if(heuristic.getValue(node) == 0)
+                return node;
+            else
+            //
+            // ,,,,revisar si es un passState....y sino explotar,,,meter hijos en queue
         }
 
         return null;

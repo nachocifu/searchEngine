@@ -1,4 +1,5 @@
 package ar.edu.itba.sia.group3;
 
-public interface Algorithm {
+public enum Algorithm {
+    BFS, DFS, IDDFS, GREEDY, ASTAR
 }
