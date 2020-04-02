@@ -1,6 +1,6 @@
 package ar.edu.itba.sia.group3;
 
-public class Node implements NodeInterface{
+public class Node{
     private State state;
     private Node parent;
     private int cost;
@@ -34,6 +34,14 @@ public class Node implements NodeInterface{
 
     public int getDepth() {
         return depth;
+    }
+
+    public boolean isDone(){
+        return state.isDone();
+    }
+
+    public void print(){
+        state.getRepresentation();
     }
 }
 

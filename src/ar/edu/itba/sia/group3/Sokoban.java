@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Sokoban {
 
@@ -28,7 +30,10 @@ public class Sokoban {
      * @param input A string representation of the input file
      * @return A grid of chars
      */
-    public static Cell[][] getBoard(String input){
+    public static SokobanState getInitialState(String input){
+        Position playerPosition = null;
+        Set<Position> boxes = new HashSet<>();
+        Set<Position> targets = new HashSet<>();
 
         String[] lines;
         lines = input.split("\n");
@@ -41,12 +46,24 @@ public class Sokoban {
             for (int j = 0; j < columns; j++) {
                 switch (line.charAt(j)) {
                     case '#': board[i][j] = new Cell(CellType.WALL); break;
-                    case '.': board[i][j] = new Cell(CellType.GOAL); break;
+                    case '.':
+                        board[i][j] = new Cell(CellType.GOAL);
+                        targets.add(new Position(i,j));
+                        break;
+                    case '$': board[i][j] = new Cell(CellType.FREE);
+                        boxes.add(new Position(i,j));
+                        board[i][j].setHasBox(true);
+                        break;
+                    case '@':
+                        board[i][j] = new Cell(CellType.FREE);
+                        playerPosition = new Position(i,j);
+                        board[i][j].setHasPlayer(true);
+                        break;
                     default: board[i][j] = new Cell(CellType.FREE); break;
                 }
             }
         }
-        return board;
+        return new SokobanState(board,playerPosition,boxes,targets);
     }
 
     public static Heuristic getHeuristic(String arg){
@@ -69,9 +86,11 @@ public class Sokoban {
         Path path = Paths.get(args[0]);
         String input = null;
         Cell[][] board;
+        SokobanState state;
+
         try {
             input = String.join("\n", Files.readAllLines(path));
-            board = getBoard(input);
+            state = getInitialState(input);
         } catch (IOException e) {
             System.err.println("Error reading input FIle. => " + e.getMessage());
             return;
@@ -84,18 +103,19 @@ public class Sokoban {
         }
 
         Heuristic heuristic = getHeuristic(args[1]);
-        if(heuristic==null){
+/*        if(heuristic==null){
             System.err.println("Error reading heuristic method");
             return;
-        }
+        } */
 
-        SokobanState state = new SokobanState(board);
+
+
         Node root = new Node(state);
 
         // -----
         Searcher searcher = new Searcher(algorithm, heuristic, root);
 
-        NodeInterface finalNode = searcher.run();
+        Node finalNode = searcher.run();
 
         if(finalNode == null) {
             System.err.println("Pincho ameooo");
@@ -104,10 +124,10 @@ public class Sokoban {
 
     }
 
-    public static void printNodePath(NodeInterface node) {
-//        if(node == null) return;
-//        node.getBoard().print();
-//        return printNodePath(node.getParent());
+    private static void printNodePath(Node node) {
+        if(node == null) return;
+        node.print();
+        printNodePath(node.getParent());
     }
 
 }

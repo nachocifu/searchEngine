@@ -1,17 +1,15 @@
 package ar.edu.itba.sia.group3;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Searcher {
 
 
     private Algorithm algorithm;
     private Heuristic heuristic;
-    private NodeInterface root;
-    private PriorityQueue<NodeInterface> border;
-    private List<State> passStates;
+    private Node root;
+    private PriorityQueue<Node> frontier;
+    private Set<State> passStates;
 
 
     /**
@@ -20,36 +18,47 @@ public class Searcher {
      * @param heuristic
      * @param root
      */
-    public Searcher(Algorithm algorithm, Heuristic heuristic, NodeInterface root) {
+    public Searcher(Algorithm algorithm, Heuristic heuristic, Node root) {
         this.algorithm = algorithm;
         this.heuristic = heuristic;
         this.root = root;
-        passStates = new LinkedList<>();
-        border = new PriorityQueue<>(); // TODO based on algorithm and heuristic should have at the top the next node to explode always
+        passStates = new HashSet<>();
+        frontier = new PriorityQueue<Node>(AlgorithmsFactory.getComparator(algorithm)); // TODO based on algorithm and heuristic should have at the top the next node to explode always
     }
 
     /**
      *
      * @return
      */
-    public NodeInterface run(){
-
+    public Node run(){
+        Node current;
+        List<State> result;
+        frontier.offer(root);
         // TODO un while que
-        while (!border.isEmpty()) {
-            //popear,,,revisar si es solucion
-            if(heuristic.getValue(node) == 0)
-                return node;
-            else
-            //
-            // ,,,,revisar si es un passState....y sino explotar,,,meter hijos en queue
+        while (!frontier.isEmpty()) {
+            current = frontier.poll();
+            if(current.isDone()){
+                return current;
+            }
+            try {
+                result = current.getState().explode();
+            } catch (CloneNotSupportedException e) {
+                System.err.println(e.getMessage());
+                continue;
+            }
+            for(State s : result){
+                if(!passStates.contains(s)){
+                    passStates.add(s);
+                    frontier.add(new Node(s,current,1,current.getDepth()+1));
+                }
+            }
         }
-
         return null;
     }
 
 
 
-    private List<NodeInterface> explode(NodeInterface) {
+    /*private List<NodeInterface> explode(NodeInterface) {
 
-    }
+    }*/
 }

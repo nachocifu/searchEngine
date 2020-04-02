@@ -66,13 +66,13 @@ public class Cell {
 
     @Override
     public String toString() {
-        if(hasBox && type ==CellType.GOAL) return "X";
-        if(hasPlayer && type ==CellType.GOAL) return "R";
+        if(type == CellType.WALL) return  "#";
+        if(hasBox && type ==CellType.GOAL) return "*";
+        if(hasPlayer && type ==CellType.GOAL) return "+";
         if(type==CellType.FREE) {
-            if(hasPlayer) return "P";
-            if(hasBox) return "B";
+            if(hasPlayer) return "@";
+            if(hasBox) return "$";
         }
-
         return type.name;
     }
 }
