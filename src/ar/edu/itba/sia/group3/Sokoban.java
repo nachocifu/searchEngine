@@ -44,7 +44,6 @@ public class Sokoban {
                     case '.': board[i][j] = new Cell(CellType.GOAL); break;
                     default: board[i][j] = new Cell(CellType.FREE); break;
                 }
-
             }
         }
         return board;
