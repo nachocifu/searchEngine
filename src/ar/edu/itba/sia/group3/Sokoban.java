@@ -126,7 +126,7 @@ public class Sokoban {
 
     private static void printNodePath(Node node) {
         if(node == null) return;
-        node.print();
+        System.out.println(node);
         printNodePath(node.getParent());
     }
 

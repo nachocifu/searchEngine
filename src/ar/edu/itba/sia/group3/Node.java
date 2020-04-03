@@ -40,7 +40,7 @@ public class Node{
         return state.isDone();
     }
 
-    public String print(){
+    public String toString(){
         return state.getRepresentation();
     }
 }
