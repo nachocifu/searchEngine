@@ -10,4 +10,6 @@ public class DummyHeuristic implements Heuristic {
         return current.getHeuristic();
     }
 
+    @Override
+    public String toString() { return DummyHeuristic.class.getSimpleName(); }
 }

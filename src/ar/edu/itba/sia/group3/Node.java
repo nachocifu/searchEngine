@@ -28,7 +28,7 @@ public class Node{
         return parent;
     }
 
-    public int getCost() {
+    public Integer getCost() {
         return cost;
     }
 

@@ -112,13 +112,41 @@ public class Sokoban {
         // -----
         Searcher searcher = new Searcher(algorithm, heuristic, root);
 
-        Node finalNode = searcher.run();
+        searcher.run();
 
-        if(finalNode == null) {
-            System.err.println("Pincho ameooo. Tiene Solucion?");
-        } else
-            printNodePath(finalNode);
+        printReport(searcher);
+    }
 
+    private static void printReport(Searcher searcher) {
+        printNodePath(searcher.getFinalNode());
+        System.out.println("###################################");
+        System.out.println("###################################");
+        System.out.println("");
+        System.out.println("# Parameters");
+        System.out.println("Heuristic: "+ searcher.getHeuristic());
+        System.out.println("Algorithm: "+ searcher.getAlgorithm());
+        System.out.println("");
+        System.out.println("# Results");
+        if(searcher.getFinalNode()==null)
+            System.err.print("Success: NO");
+        else
+            System.out.println("Success: YES");
+        System.out.println("Time (mili): "+searcher.getExecutionTime());
+        System.out.println("Depth: "+(searcher.getFinalNode()!=null?searcher.getFinalNode().getDepth():"(Doesnt Apply)"));
+        System.out.println("Cost: "+getCostIfApplies(searcher));
+        System.out.println("Num. Exploded Nodes: "+searcher.getExplodedCounter());
+        System.out.println("Final frontier size: "+searcher.getFrontierSize());
+    }
+
+    private static String getCostIfApplies(Searcher searcher) {
+        switch (searcher.getAlgorithm()) {
+            case BFS:
+            case DFS:
+            case IDDFS:
+                return "(Doesnt apply)";
+            default:
+                return searcher.getFinalNode()!=null?searcher.getFinalNode().getCost().toString():"(Doesnt apply)";
+        }
     }
 
     private static void printNodePath(Node node) {
