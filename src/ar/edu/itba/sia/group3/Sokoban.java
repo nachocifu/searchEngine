@@ -127,10 +127,7 @@ public class Sokoban {
         System.out.println("Algorithm: "+ searcher.getAlgorithm());
         System.out.println("");
         System.out.println("# Results");
-        if(searcher.getFinalNode()==null)
-            System.err.print("Success: NO");
-        else
-            System.out.println("Success: YES");
+        System.out.println("Success: "+(searcher.getFinalNode()==null?"NO":"YES"));
         System.out.println("Time (mili): "+searcher.getExecutionTime());
         System.out.println("Depth: "+(searcher.getFinalNode()!=null?searcher.getFinalNode().getDepth():"(Doesnt Apply)"));
         System.out.println("Cost: "+getCostIfApplies(searcher));
