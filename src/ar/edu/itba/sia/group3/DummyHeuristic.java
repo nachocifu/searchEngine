@@ -1,5 +1,8 @@
 package ar.edu.itba.sia.group3;
 
+/**
+ * Admissible
+ */
 public class DummyHeuristic implements Heuristic {
 
     @Override
