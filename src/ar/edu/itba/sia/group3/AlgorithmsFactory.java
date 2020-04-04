@@ -29,6 +29,14 @@ public class AlgorithmsFactory {
                 }
             };
 
+            case ASTAR:
+            case IDASTAR: return new Comparator<Node>() {
+                @Override
+                public int compare(Node o1, Node o2) {
+                    return o1.getCost() - o2.getCost();
+                }
+            };
+
             default: return null;
         }
     }
