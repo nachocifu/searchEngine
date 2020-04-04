@@ -9,6 +9,17 @@ public class SokobanState implements State, Cloneable {
     private Set<Position> targets;
     private Cell[][] board;
 
+    public Set<Position> getBoxes() {
+        return boxes;
+    }
+
+    public Set<Position> getTargets() {
+        return targets;
+    }
+
+    public Cell[][] getBoard() {
+        return board;
+    }
 
     public SokobanState(Cell[][] board, Position playerPosition, Set<Position> boxes, Set<Position> targets) {
         this.board = board;

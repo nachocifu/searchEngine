@@ -13,10 +13,10 @@ public class Node{
         this.depth = depth;
     }
 
-    public Node(State state) {
+    public Node(State state, int cost) {
         this.state = state;
         this.parent = null;
-        this.cost = 0;
+        this.cost = cost;
         this.depth = 0;
     }
 

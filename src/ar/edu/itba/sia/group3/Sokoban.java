@@ -1,11 +1,10 @@
 package ar.edu.itba.sia.group3;
 
-import jdk.nashorn.internal.runtime.regexp.joni.SearchAlgorithm;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ public class Sokoban {
             case "IDDFS":
                 return Algorithm.IDDFS;
             case "GGS":
-                return Algorithm.GREEDY;
+                return Algorithm.GGS;
             default: return null;
         }
     }
@@ -66,17 +65,20 @@ public class Sokoban {
         return new SokobanState(board,playerPosition,boxes,targets);
     }
 
-    public static Heuristic getHeuristic(String arg){
-        switch (arg) {
-//            case "BFS":
-//                return new BFS();
-//            case "DFS":
-//                return new DFS();
-//            case "IDDFS":
-//                return new IDDFS();
-//            case "GGS":
-//                return new GGS();
-            default: return null;
+    public static Heuristic getHeuristic(String[] arg){
+
+        switch (arg[1]) {
+            case "BFS":
+            case "DFS":
+            case "IDDFS":
+                return new DummyHeuristic();
+            default:
+                switch (arg[2]) {
+                    case "dummy": return new DummyHeuristic();
+                    default:
+                        System.err.println("Error reading heuristic method");
+                        throw new InvalidParameterException("Missing valid heuristic");
+                }
         }
     }
 
@@ -102,15 +104,10 @@ public class Sokoban {
             return;
         }
 
-        Heuristic heuristic = getHeuristic(args[1]);
-/*        if(heuristic==null){
-            System.err.println("Error reading heuristic method");
-            return;
-        } */
 
+        Heuristic heuristic = getHeuristic(args);
 
-
-        Node root = new Node(state);
+        Node root = new Node(state, heuristic.getValue(state));
 
         // -----
         Searcher searcher = new Searcher(algorithm, heuristic, root);

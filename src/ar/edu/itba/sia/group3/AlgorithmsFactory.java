@@ -13,17 +13,19 @@ public class AlgorithmsFactory {
                 }
             };
 
-            case DFS: return new Comparator<Node>() {
+            case DFS:
+            case IDDFS:
+                return new Comparator<Node>() {
                 @Override
                 public int compare(Node o1, Node o2) {
                     return o2.getDepth() - o1.getDepth();
                 }
             };
 
-            case IDDFS: return new Comparator<Node>() {
+            case GGS: return new Comparator<Node>() {
                 @Override
                 public int compare(Node o1, Node o2) {
-                    return o2.getDepth() - o1.getDepth();
+                    return o1.getCost() - o2.getCost();
                 }
             };
 

@@ -65,7 +65,7 @@ public class Searcher {
                     for(State s : result){
                         if(!passStates.contains(s)){
                             passStates.add(s);
-                            frontier.add(new Node(s,current,1,current.getDepth()+1));
+                            frontier.add(new Node(s,current,heuristic.getValue(s),current.getDepth()+1));
                         }
                     }
                 }
