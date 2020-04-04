@@ -118,7 +118,7 @@ public class Sokoban {
         Node finalNode = searcher.run();
 
         if(finalNode == null) {
-            System.err.println("Pincho ameooo");
+            System.err.println("Pincho ameooo. Tiene Solucion?");
         } else
             printNodePath(finalNode);
 

@@ -33,10 +33,9 @@ public class Searcher {
     public Node run(){
 
         Set<Node> iterativeAux = new HashSet<>(); //en los iterables guardo aca nodos que no debo seguir explorando en esa iteracion
-        int limit = 2;
+        int limit = 1;
         iterativeAux.add(root);
         passStates.add(root.getState());
-        boolean explorable = true;
 
         Node current;
         List<State> result;
@@ -44,24 +43,19 @@ public class Searcher {
 
         //lo iterativo deberia ser transparente al resto
         while (!iterativeAux.isEmpty()){
+            limit = limit*2;
             frontier.addAll(iterativeAux); //le doy a la cola nodo a partir de los cuales explorar. despues de primera iteracion son los que fueron limitados
             iterativeAux.clear(); //limpio para dejar los nuevos limitados
 
             while (!frontier.isEmpty()) {
-                explorable = true;
                 current = frontier.poll();
+//                System.out.println(current.getState().getRepresentation());;
                 if(current.isDone()){
                     return current;
                 }
-                //TODO despues de cortar, cuando vuelve a empezar loopea infinitamente entre estructuras porque la profundidad sigue siendo la misma
-                if(algorithm == Algorithm.IDDFS || algorithm == Algorithm.IDASTAR){
-                    if(current.getDepth() % limit == 0 && current.getDepth() != 0)
-                    {
-                        iterativeAux.add(current);
-                        explorable = false;
-                    }
-                }
-                if(explorable){
+                if((algorithm == Algorithm.IDDFS || algorithm == Algorithm.IDASTAR) && (current.getDepth() == limit)) {
+                    iterativeAux.add(current);
+                } else {
                     try {
                         result = current.getState().explode();
                     } catch (CloneNotSupportedException e) {

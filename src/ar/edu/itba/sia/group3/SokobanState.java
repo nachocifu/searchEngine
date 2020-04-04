@@ -138,7 +138,7 @@ public class SokobanState implements State, Cloneable {
             aux.board[aux.playerPosition.row][aux.playerPosition.column].setHasPlayer(true);
             //move box
             aux.board[aux.playerPosition.row][aux.playerPosition.column].setHasBox(false);
-            aux.board[aux.playerPosition.row + 1][aux.playerPosition.column].setHasBox(true);
+            aux.board[aux.playerPosition.row][aux.playerPosition.column-1].setHasBox(true);
             aux.boxes.remove(new Position(aux.playerPosition.row, aux.playerPosition.column));
             aux.boxes.add(new Position(aux.playerPosition.row, aux.playerPosition.column - 1));
             performableActions.add(aux);
