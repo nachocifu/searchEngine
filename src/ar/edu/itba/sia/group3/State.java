@@ -2,10 +2,21 @@ package ar.edu.itba.sia.group3;
 
 import java.util.List;
 
-public interface State {
-    boolean isDone();
+public abstract class State {
 
-    List<State> explode() throws CloneNotSupportedException;
+    private Integer heuristic = null;
 
-    String getRepresentation();
+    public Integer getHeuristic() {
+        return heuristic;
+    }
+
+    public void setHeuristic(Integer heuristic) {
+        this.heuristic = heuristic;
+    }
+
+    public abstract boolean isDone();
+
+    public abstract List<State> explode() throws CloneNotSupportedException;
+
+    public abstract String getRepresentation();
 }

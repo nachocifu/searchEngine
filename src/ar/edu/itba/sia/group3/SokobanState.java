@@ -2,12 +2,21 @@ package ar.edu.itba.sia.group3;
 
 import java.util.*;
 
-public class SokobanState implements State, Cloneable {
+public class SokobanState extends State implements Cloneable {
 
     private Position playerPosition;
     private Set<Position> boxes;
     private Set<Position> targets;
     private Cell[][] board;
+    private int heuristic = 0;
+
+    public Integer getHeuristic() {
+        return heuristic;
+    }
+
+    public void setHeuristic(Integer heuristic) {
+        this.heuristic = heuristic;
+    }
 
     public Set<Position> getBoxes() {
         return boxes;

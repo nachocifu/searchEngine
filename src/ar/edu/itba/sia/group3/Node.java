@@ -16,7 +16,7 @@ public class Node{
     public Node(State state, int cost) {
         this.state = state;
         this.parent = null;
-        this.cost = cost;
+        this.cost = 0;
         this.depth = 0;
     }
 

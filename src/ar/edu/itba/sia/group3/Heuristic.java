@@ -2,5 +2,6 @@ package ar.edu.itba.sia.group3;
 
 public interface Heuristic {
 
-    public abstract int getValue( State state);
+    public abstract Integer calculate(State state);
+
 }

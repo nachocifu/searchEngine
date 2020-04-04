@@ -107,7 +107,7 @@ public class Sokoban {
 
         Heuristic heuristic = getHeuristic(args);
 
-        Node root = new Node(state, heuristic.getValue(state));
+        Node root = new Node(state, heuristic.calculate(state));
 
         // -----
         Searcher searcher = new Searcher(algorithm, heuristic, root);

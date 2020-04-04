@@ -25,7 +25,7 @@ public class AlgorithmsFactory {
             case GGS: return new Comparator<Node>() {
                 @Override
                 public int compare(Node o1, Node o2) {
-                    return o1.getCost() - o2.getCost();
+                    return o1.getState().getHeuristic() - o2.getState().getHeuristic();
                 }
             };
 
