@@ -2,7 +2,7 @@
 Java university project for searching solutions for Sokoban board game boards.  Implements several search algorithms 
 with several heuristics and handles common problems.
 ## Implementation remarks
-Developed and tested with Java version 8 on Windows 10 and Java version 13 on Mac OS Catalina.
+Developed and tested with Java version 8 on Windows 10, Java version 13 on Mac OS Catalina and Java version 8 on Archlinux(4.19.101-1-lts).
 ### Assumptions
 This project assumes boards always have same number of boxes and targets locations.
 If it dosnt, algorithm will run indefinitely.
@@ -31,6 +31,7 @@ On a terminal, position your current directory on the root folder of this projec
 Follow the instructions on the following subsections.
 ### Compiling
 The followint applies to unix based systems.
+First create on the root of the project a classes directory `mkdir classes`.  
 To comile the project run: `javac src/ar/edu/itba/sia/group3/*.java -d classes`
 Then change directory to the classes directory generated. `cd classes`
 Your ready to run the program with `java ar.edu.itba.sia.group3.Sokoban [board] [algorithm] [optionalHeuristic]`
