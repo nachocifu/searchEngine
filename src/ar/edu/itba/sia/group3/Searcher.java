@@ -2,6 +2,10 @@ package ar.edu.itba.sia.group3;
 
 import java.util.*;
 
+// javac src/ar/edu/itba/sia/group3/*.java -d classes
+// java -cp classes ar/edu/itba/sia/group3.Sokoban
+
+
 public class Searcher {
 
 
@@ -76,7 +80,6 @@ public class Searcher {
                     for(State s : result){
                         if(!passStates.contains(s)){
                             passStates.add(s);
-                            ;
                             frontier.add(new Node(s,current, current.getCost()+heuristic.calculate(s),current.getDepth()+1));
                         }
                     }
