@@ -7,7 +7,9 @@ public class Cell {
 
     private boolean hasPlayer, hasBox;
 
-    public Cell(CellType cellType) { type = cellType; }
+    public Cell(CellType cellType) {
+        type = cellType;
+    }
 
     public boolean hasPlayer() {
         return hasPlayer;
