@@ -26,7 +26,7 @@ This heuristic is admissible as it never overestimates and will always finish on
 #### dummyManhattan  
 ### Deadlock
 
-## How to use/run
+## Running
 On a terminal, position your current directory on the root folder of this project (same level as this README).
 Follow the instructions on the following subsections.
 ### Compiling
