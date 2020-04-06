@@ -179,4 +179,8 @@ public class SokobanState extends State implements Cloneable {
         }
         return performableActions;
     }
+
+    public Position getPlayerPosition() {
+        return playerPosition;
+    }
 }

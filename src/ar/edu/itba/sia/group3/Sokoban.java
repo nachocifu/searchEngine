@@ -20,6 +20,10 @@ public class Sokoban {
                 return Algorithm.IDDFS;
             case "GGS":
                 return Algorithm.GGS;
+            case "ASTAR":
+                return Algorithm.ASTAR;
+            case "IDASTAR":
+                return Algorithm.IDASTAR;
             default: return null;
         }
     }
@@ -75,8 +79,9 @@ public class Sokoban {
             default:
                 switch (arg[2]) {
                     case "dummy": return new DummyHeuristic();
-                    case "Manhattan": return new ManhattanDistanceTargetsToBoxes();
+                    case "manhattan": return new ManhattanDistanceTargetsToBoxes();
                     case "euclidean": return new EuclideanDistanceTargetsToBoxes();
+                    case "dummyManhattan": return new ManhattanDistancePlayerToBoxes();
                     default:
                         System.err.println("Error reading heuristic method");
                         throw new InvalidParameterException("Missing valid heuristic");
