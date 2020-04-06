@@ -15,6 +15,9 @@ All boards are completely surrounded by walls.
 - A Star
 - Iterative Dipping A Star
 ### Heuristics
+Used by the algorithms that use heuristics or cost function.  
+Each possible board is assigned a number that represents how close to the solution it is. The closer to zero
+implies closer to finishing. Only finished boards should have 0.
 #### Dummy
 For debugging and comparison, the dummy heuristic assigns value `1` to all non final successful states, while for 
 final assigns `1`. This heuristic is quite trivial and dosnt generate any 
@@ -22,9 +25,25 @@ considerable search optimization but is quite helpfull for debugging as each nod
 therefore the programmer can check a counter that should increment by one always.
 This heuristic is admissible as it never overestimates and will always finish on `0` when on final states.
 #### Manhattan
-#### dummyManhattan  
-#### dummyManhattan  
+The board has target cells and cells with boxes. For every box, the closest targets distance is calculated and summed
+ with the ones of the rest of the boxes. The sum is the resulting value of the given board. Notice multiple boxes 
+ could be calculating distance to same target cell. 
+ Distance is measured one step at a time horizontally and vertically.
+#### dummyManhattan
+The states value will be the sum of the players distances to all boxes.
+#### euclidean
+Similar to Manhattan but distances are measured diagonally.
 ### Deadlock
+Understood as a possible state where no solutions will be reachable from that point on based on the distribution of 
+objects on the board. Multiple types of deadlocks are possible, each having different possible approaches for handling 
+with their pros and cons.
+This implementation handles the case where a box is blocked and will never be able to move again. Whe presented with 
+this cases, the heuristic will increase value of such states by a considerable amount.  
+- If a box is besides to walls and is not a target cell, then that box wont be possible to be removed from that 
+corner ever. Will be considered as a blocked box.  
+- If a box is blocked by a wall and a box, then the second box will be evaluated to see if it can be eventually 
+moved or if is also blocked. Notice the blocking by one box on another could happen with more than two boxes, this 
+scenarios are handled recursively.
 
 ## Running
 On a terminal, position your current directory on the root folder of this project (same level as this README).
