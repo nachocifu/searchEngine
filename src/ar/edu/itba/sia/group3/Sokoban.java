@@ -75,6 +75,8 @@ public class Sokoban {
             default:
                 switch (arg[2]) {
                     case "dummy": return new DummyHeuristic();
+                    case "Manhattan": return new ManhattanDistanceTargetsToBoxes();
+                    case "euclidean": return new EuclideanDistanceTargetsToBoxes();
                     default:
                         System.err.println("Error reading heuristic method");
                         throw new InvalidParameterException("Missing valid heuristic");

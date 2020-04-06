@@ -55,8 +55,7 @@ public class SokobanState extends State implements Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
         SokobanState that = (SokobanState) o;
         return playerPosition.equals(that.playerPosition) &&
-                boxes.equals(that.boxes) &&
-                targets.equals(that.targets);
+                boxes.equals(that.boxes);
     }
 
     public SokobanState clone() throws CloneNotSupportedException {
