@@ -27,7 +27,7 @@ public class Searcher {
         this.heuristic = heuristic;
         this.root = root;
         passStates = new HashSet<>();
-        frontier = new PriorityQueue<Node>(AlgorithmsFactory.getComparator(algorithm)); // TODO based on algorithm and heuristic should have at the top the next node to explode always
+        frontier = new PriorityQueue<Node>(AlgorithmsFactory.getComparator(algorithm));
         // metrics
         executionTime = -1;
         executionTime = 0;
