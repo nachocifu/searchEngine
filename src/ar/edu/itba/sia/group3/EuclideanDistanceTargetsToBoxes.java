@@ -5,6 +5,10 @@ public class EuclideanDistanceTargetsToBoxes implements Heuristic {
     public Integer calculate(State state) {
         SokobanState sokobanState = (SokobanState) state;
 
+       /* if(DeadlockFinder.isDeadlock(sokobanState)){
+            return Integer.MAX_VALUE;
+        } */
+
         if(sokobanState.getHeuristic()==null) {
             int acum = 0;
             int currManhattanDistance;

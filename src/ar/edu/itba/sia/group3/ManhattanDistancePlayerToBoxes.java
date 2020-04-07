@@ -5,6 +5,11 @@ public class ManhattanDistancePlayerToBoxes implements Heuristic {
     public Integer calculate(State state) {
         SokobanState sokobanState = (SokobanState) state;
 
+      /*  if(DeadlockFinder.isDeadlock(sokobanState)){
+            return Integer.MAX_VALUE;
+        } */
+
+
         if(sokobanState.getHeuristic()==null) {
             int manhattanDistance = 0;
             for (Position p : ((SokobanState) state).getBoxes()) {
