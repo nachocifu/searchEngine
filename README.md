@@ -35,17 +35,6 @@ For each box, the manhattan distance to the player is calculated and summed with
 The state value will be the sum of the players distances to all boxes.
 #### euclidean
 Similar to Manhattan heuristic but distances are measured with Euclides formula.
-### Deadlock
-Understood as a possible state where no solutions will be reachable from that point on based on the distribution of 
-objects on the board. Multiple types of deadlocks are possible, each having different possible approaches for handling 
-with their pros and cons.
-This implementation handles the case where a box is blocked and will never be able to move again. When presented with
-this cases, the heuristic will give the maximum value possible to such states.
-- If a box is besides two walls and is not a target cell, then that box wont be possible to be removed from that
-corner ever. Will be considered as a blocked box.  
-- If a box is blocked by a wall, and a box or two or more boxes, these boxes are evaluated to see if they can be eventually
-moved or if are also blocked. If any of the boxes are blocked by one or more boxes, those are recursively checked.
-
 ## Running
 On a terminal, position your current directory on the root folder of this project (same level as this README).
 Follow the instructions on the following subsections.
@@ -93,7 +82,3 @@ Below such line, data about the run will be displayed.
 Above such line the solution will be shown state by state. Immediately above the `#` lines will be the initial board,
 scrolling upwards on the command line will show one by one the boards after every movement towards the final board 
 that will appear imediatly after the line that executed the program. 
-## Conclusions
-  
-  
-  
