@@ -82,9 +82,9 @@ The following is a key value list of the heuristics accepted. The key is the arg
 - dummy: Dummy
 - euclidean: Euclidean
 ### Example of running
-`java ar.edu.itba.sia.group3.Sokoban ../boards/1.txt BFS`  
+`java ar.edu.itba.sia.group3.Sokoban ../boards/2.txt BFS`  
 
-`java ar.edu.itba.sia.group3.Sokoban ../boards/1.txt ASTAR manhattan`
+`java ar.edu.itba.sia.group3.Sokoban ../boards/2.txt ASTAR manhattan`
 ### Output
 Nothing is output during execution.  
 Once finalized, output is divided in two sections. This sections are separated by two lines of `#` symbols.
