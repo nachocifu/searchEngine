@@ -27,5 +27,5 @@ public class ManhattanDistanceTargetsToBoxes implements Heuristic {
     }
 
     @Override
-    public String toString() { return DummyHeuristic.class.getSimpleName(); }
+    public String toString() { return ManhattanDistanceTargetsToBoxes.class.getSimpleName(); }
 }

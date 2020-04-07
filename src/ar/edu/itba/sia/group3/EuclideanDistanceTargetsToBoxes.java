@@ -26,5 +26,5 @@ public class EuclideanDistanceTargetsToBoxes implements Heuristic {
     }
 
     @Override
-    public String toString() { return DummyHeuristic.class.getSimpleName(); }
+    public String toString() { return EuclideanDistanceTargetsToBoxes.class.getSimpleName(); }
 }
