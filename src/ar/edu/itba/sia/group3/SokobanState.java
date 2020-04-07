@@ -70,6 +70,7 @@ public class SokobanState extends State implements Cloneable {
         sokobanState.board = newBoard;
         sokobanState.boxes = new HashSet<>(boxes);
         sokobanState.targets = new HashSet<>(targets);
+        sokobanState.setHeuristic(null);
         return sokobanState;
     }
 
