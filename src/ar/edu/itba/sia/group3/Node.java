@@ -3,20 +3,20 @@ package ar.edu.itba.sia.group3;
 public class Node{
     private State state;
     private Node parent;
-    private int cost;
+    private int costFunction;
     private int depth;
 
-    public Node(State state, Node parent, int cost, int depth) {
+    public Node(State state, Node parent, int costFunction, int depth) {
         this.state = state;
         this.parent = parent;
-        this.cost = cost;
+        this.costFunction = costFunction;
         this.depth = depth;
     }
 
-    public Node(State state, int cost) {
+    public Node(State state, int costFunction) {
         this.state = state;
         this.parent = null;
-        this.cost = 0;
+        this.costFunction = 0;
         this.depth = 0;
     }
 
@@ -28,8 +28,8 @@ public class Node{
         return parent;
     }
 
-    public Integer getCost() {
-        return cost;
+    public Integer getCostFunction() {
+        return costFunction;
     }
 
     public int getDepth() {

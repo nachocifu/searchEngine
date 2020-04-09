@@ -149,7 +149,7 @@ public class Sokoban {
             case IDDFS:
                 return "(Doesnt apply)";
             default:
-                return searcher.getFinalNode()!=null?searcher.getFinalNode().getCost().toString():"(Doesnt apply)";
+                return searcher.getFinalNode()!=null?searcher.getFinalNode().getCostFunction().toString():"(Doesnt apply)";
         }
     }
 

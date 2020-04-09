@@ -33,7 +33,7 @@ public class AlgorithmsFactory {
             case IDASTAR: return new Comparator<Node>() {
                 @Override
                 public int compare(Node o1, Node o2) {
-                    return o1.getCost() - o2.getCost();
+                    return o1.getCostFunction() - o2.getCostFunction();
                 }
             };
 
