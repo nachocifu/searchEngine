@@ -41,31 +41,33 @@ public class Searcher {
     public Node run(){
         long startTime = System.currentTimeMillis();
 
-        Set<Node> iterativeAux = new HashSet<>(); //en los iterables guardo aca nodos que no debo seguir explorando en esa iteracion
-        int limit = 1;
-        iterativeAux.add(root);
+        //Set<Node> iterativeAux = new HashSet<>(); //en los iterables guardo aca nodos que no debo seguir explorando en esa iteracion
+        int limit = 7;
+        //iterativeAux.add(root);
         passStates.add(root.getState());
 
         Node current;
         List<State> result;
-       // frontier.offer(root);
-
+        boolean done = false;
         //lo iterativo deberia ser transparente al resto
-        while (!iterativeAux.isEmpty()){
-            limit = limit*2;
-            frontier.addAll(iterativeAux); //le doy a la cola nodo a partir de los cuales explorar. despues de primera iteracion son los que fueron limitados
-            iterativeAux.clear(); //limpio para dejar los nuevos limitados
+        while (!done){
+            //limit = limit*2;
+            frontier.offer(root);
+            //frontier.addAll(iterativeAux); //le doy a la cola nodo a partir de los cuales explorar. despues de primera iteracion son los que fueron limitados
+            //iterativeAux.clear(); //limpio para dejar los nuevos limitados
+            passStates.clear();
 
             while (!frontier.isEmpty()) {
                 current = frontier.poll();
-//                System.out.println(current.getState().getRepresentation());;
+                System.out.println(current.getState().getRepresentation());;
                 if(current.isDone()){
+                    done = true;
                     this.solution = current;
                     this.executionTime = System.currentTimeMillis() - startTime;
                     return this.solution;
                 }
                 if((algorithm == Algorithm.IDDFS || algorithm == Algorithm.IDASTAR) && (current.getDepth() == limit)) {
-                    iterativeAux.add(current);
+                    clearVisited(current); //. hay que desvisitar
                 } else {
                     try {
                         this.explodedCounter++;
@@ -74,7 +76,7 @@ public class Searcher {
                         System.err.println(e.getMessage());
                         continue;
                     }
-                    for(State s : result){
+                    for(State s : result){ //si se agregan 0 (hoja) hay que desvisitar?
                         if(!passStates.contains(s)){
                             passStates.add(s);
                             frontier.add(new Node(s,current, current.getDepth()+1+heuristic.calculate(s),current.getDepth()+1));
@@ -109,6 +111,16 @@ public class Searcher {
 
     public Integer getFrontierSize() {
         return frontier.size();
+    }
+
+    private void clearVisited(Node current){
+        if(current == null){
+            return;
+        }
+        if(!frontier.contains(current)){
+            passStates.remove(current.getState());
+        }
+        clearVisited(current.getParent());
     }
 
 
