@@ -40,10 +40,7 @@ public class Searcher {
      */
     public Node run(){
         long startTime = System.currentTimeMillis();
-
-        //Set<Node> iterativeAux = new HashSet<>(); //en los iterables guardo aca nodos que no debo seguir explorando en esa iteracion
-        int limit = 7;
-        //iterativeAux.add(root);
+        int limit = 2;
         passStates.add(root.getState());
 
         Node current;
@@ -51,15 +48,13 @@ public class Searcher {
         boolean done = false;
         //lo iterativo deberia ser transparente al resto
         while (!done){
-            //limit = limit*2;
+            limit = limit*2;
             frontier.offer(root);
-            //frontier.addAll(iterativeAux); //le doy a la cola nodo a partir de los cuales explorar. despues de primera iteracion son los que fueron limitados
-            //iterativeAux.clear(); //limpio para dejar los nuevos limitados
             passStates.clear();
 
             while (!frontier.isEmpty()) {
                 current = frontier.poll();
-                System.out.println(current.getState().getRepresentation());;
+//                System.out.println(current.getState().getRepresentation());;
                 if(current.isDone()){
                     done = true;
                     this.solution = current;
@@ -88,6 +83,7 @@ public class Searcher {
         this.executionTime = System.currentTimeMillis() - startTime;
         return null;
     }
+
 
     public Node getFinalNode() {
         return this.solution;
