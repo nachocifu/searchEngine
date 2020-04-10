@@ -40,7 +40,7 @@ public class Searcher {
      */
     public Node run(){
         long startTime = System.currentTimeMillis();
-        int limit = 2;
+        int limit = 1;
         passStates.add(root.getState());
 
         Node current;
@@ -49,6 +49,7 @@ public class Searcher {
         //lo iterativo deberia ser transparente al resto
         while (!done){
             limit = limit*2;
+            if((algorithm == Algorithm.IDDFS || algorithm == Algorithm.IDASTAR)) System.out.println("ID: "+limit);
             frontier.offer(root);
             passStates.clear();
 
