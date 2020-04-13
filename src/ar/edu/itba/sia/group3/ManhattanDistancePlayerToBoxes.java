@@ -12,9 +12,10 @@ public class ManhattanDistancePlayerToBoxes implements Heuristic {
 
         if(sokobanState.getHeuristic()==null) {
             int manhattanDistance = 0;
-            for (Position p : ((SokobanState) state).getBoxes()) {
-                manhattanDistance += Distances.manhattanDistance(p, ((SokobanState) state).getPlayerPosition());
-            }
+            if(!state.isDone())
+                for (Position p : ((SokobanState) state).getBoxes()) {
+                    manhattanDistance += Distances.manhattanDistance(p, ((SokobanState) state).getPlayerPosition());
+                }
             sokobanState.setHeuristic(manhattanDistance);
             return manhattanDistance;
         } else
